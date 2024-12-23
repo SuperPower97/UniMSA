@@ -2,7 +2,6 @@
 
 
 ## Content
-- [Note](#Note)
 - [Data Preparation](#Data-preparation)
 - [Environment](#Environment)
 - [Training](#Training)
