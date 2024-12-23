@@ -1,0 +1,81 @@
+base:
+  seed: 1111
+  batch_size: 1
+  num_workers: 8
+  lambda: 0.1
+  train_mode: regression # only support regression now
+  key_eval: Non0_acc_2 # Has0_acc_2
+  missing_rate_eval_test: 0   # used for evaluation and testing
+
+
+dataset:
+  datasetName: mosi
+  # dataPath: /mnt/data1/zhanghaoyu/Datasets/MSA_Datasets/MOSI/Processed/unaligned_50.pkl
+  dataPath: /home/icdm/wyt/datasets/mosi/Processed/unaligned_50.pkl
+
+model:    
+  feature_extractor:
+    bert_pretrained: 'bert-base-uncased'
+    input_length: [50, 500, 375] # language, video, audio
+    token_length: [8, 8, 8] # language, video, audio
+    heads: 8
+    input_dims: [768, 20, 5] # language, video, audio
+    hidden_dims: [128, 128, 128] # language, video, audio
+    depth: 2
+
+  dmc:
+    proxy_dominant_feature_generator:
+      input_length: 24
+      token_length: 8
+      depth: 2
+      heads: 8
+      input_dim: 128
+      hidden_dim: 128
+
+    effectiveness_discriminator:
+      input_dim: 128
+      hidden_dim: 64
+      out_dim: 2
+
+    completeness_check:
+      input_length: 8
+      token_length: 1
+      depth: 2
+      heads: 8
+      input_dim: 128
+      hidden_dim: 128
+
+  reconstructor:
+    input_length: 8
+    depth: 2
+    heads: 8
+    input_dim: 128
+    hidden_dim: 128
+      
+  dmml:
+    language_encoder:
+      input_length: 8
+      token_length: 8
+      depth: 2
+      heads: 8
+      input_dim: 128
+      hidden_dim: 128
+
+    hyper_modality_learning:
+      depth: 3
+      heads: 8
+      input_dim: 128
+      hidden_dim: 128
+    
+    cross_bipolar_attention:
+      hidden_dim: 128
+      heads: 8   
+
+  nig_evidence:  
+    nig_mlp1:
+      input_dim1: 128
+      output_dim1: 4
+    
+    nig_mlp2:
+      input_dim2: 128
+      output_dim2: 4
