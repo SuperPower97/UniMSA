@@ -1,7 +1,7 @@
 import yaml
 import subprocess
 
-yaml_file = '/home/icdm/wyt/EUCSA-fus/configs/train_mosi.yaml' 
+yaml_file = './configs/train_mosi.yaml' 
 
 seeds = [1111, 1112, 1113]
 lambda_values = [0.1]
